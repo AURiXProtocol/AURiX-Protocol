@@ -1,0 +1,293 @@
+AURiX Protocol Stack — v3
+0. Purpose of the Protocol Stack
+
+This document explains the operational architecture of AURiX: the ordered set of layers that transform raw local signals into stable behavioral attestations while respecting LPIN, SELFiX, and all invariants.
+
+The stack is not an implementation, but a topology—the minimum set of surfaces required for a compliant AURiX engine.
+
+1. Overview of the Stack
+
+AURiX is composed of five stacked layers, each with strict boundaries:
+
+Acquisition Layer (local-only inputs)
+
+Normalization & Boundary-Layer Filter
+
+Invariant Checking Layer (LPIN Tests)
+
+Attestation Engine (Behavioral State Surface)
+
+Replay Contract + Local Ledger
+
+These layers allow humans and systems to evaluate behaviors without identity, inference, or external telemetry.
+
+2. Acquisition Layer
+
+(What AURiX can see — and what it must never see)
+
+2.1 Allowed Inputs
+
+The acquisition layer is strictly limited to non-identity, non-personal, non-content data. Allowable inputs include:
+
+Rate of change in observable behavior
+
+Stability / instability patterns
+
+Contradiction signals
+
+Surface-level interactions
+
+Local runtime environment properties
+
+Structural page properties (not content)
+
+User actions only insofar as they create detectable drift
+
+It may observe behavioral surfaces, not who is behaving.
+
+2.2 Forbidden Inputs
+
+The acquisition layer must never observe or store:
+
+Private content
+
+Identity attributes
+
+Intent, motive, emotion
+
+Browsing history
+
+Behavioral fingerprints
+
+Metadata that could form surveillance
+
+AI model embeddings
+
+Probabilistic inference of any kind
+
+If a device provides any such signal, the AURiX instance must reject it or null-route it.
+
+3. Normalization & Boundary-Layer Filter
+
+The goal of this layer is to transform raw signals into canonical, non-personal behavioral deltas.
+
+What this means:
+
+All allowed input signals are normalized to:
+
+Δ pattern stability
+
+Δ contradiction rate
+
+Δ behavioral drift
+
+Δ cross-surface alignment
+
+Δ timing variance
+
+The filter removes:
+
+user-specific patterns
+
+environment-specific noise
+
+any signal that could hint at identity
+
+The output of this layer is a clean, invariant-neutral behavioral vector.
+
+4. Invariant Checking Layer (LPIN Tests)
+
+This is the heart of AURiX.
+
+Every input — every cycle — is subjected to mandatory invariant tests:
+
+4.1 Locality Test
+
+Does this behavioral state depend on any remote inference, identity stitching, telemetry, or cross-device aggregation?
+
+If yes → HALT.
+
+4.2 Privacy Test
+
+Could this state, if logged or replayed, reveal private user data?
+
+If yes → HALT.
+
+4.3 Identity-Noncollapse Test
+
+Does any upstream layer imply:
+
+clustering
+
+classification
+
+prediction
+
+ranking
+
+categorization
+
+personalization
+
+If yes → HALT.
+
+4.4 Non-Extraction Test
+
+Does this behavior result in exportable user data without explicit consent?
+
+If yes → HALT.
+
+4.5 Non-Persuasion Test
+
+Would the system’s output influence the user, nudge behavior, or guide choices?
+
+If yes → HALT.
+
+4.6 Predictability Test
+
+Is the behavior reproducible from local evidence?
+
+If no → HALT.
+
+5. Attestation Engine (Behavioral State Surface)
+
+If the input passes all invariants, the attestation engine produces one of three structural states:
+
+5.1 Stable State
+
+Behavior is consistent and reproducible.
+
+5.2 Uncertain State
+
+Behavior is drifting or contradictory in a non-unsafe way.
+
+5.3 Unsafe / Halt State
+
+An invariant has been violated or cannot be verified.
+
+The attestation engine is the only surface allowed to emit output.
+
+It must output no text, no explanation, no content, only state.
+
+This is what allows AURiX to be:
+
+non-political
+
+non-narrative
+
+non-prescriptive
+
+and identity-free
+
+6. Replay Contract + Local Ledger (Final Layer)
+
+This is the accountability mechanism that ensures:
+
+reproducibility
+
+auditability
+
+trustworthiness without surveillance
+
+user sovereignty
+
+6.1 Local Ledger
+
+A minimal, local-only record of:
+
+invariant tests
+
+attestation states
+
+boundary violations (null-logged)
+
+No personal data.
+No timestamps that imply history.
+No behavioral fingerprints.
+Only what is needed to recreate the same attestation.
+
+6.2 Replay Contract
+
+Defines how AURiX proves that:
+
+“This attestation was produced correctly under invariant constraints.”
+
+Replay must be:
+
+local
+
+deterministic
+
+identical across devices
+
+identical across time
+
+independent of identity
+
+Replay is not a behavioral log — it is a structural ledger of invariant events.
+
+If replay cannot confirm the state → the attestation is void.
+
+7. Stack Separation Guarantees
+
+To prevent capture, inference, or drift, the following walls must exist:
+
+7.1 Acquisition cannot access user identity.
+
+If identity enters this layer → HALT.
+
+7.2 Normalization cannot export raw signals.
+
+Only processed behavioral vectors may continue.
+
+7.3 Invariant checks must remain immutable.
+
+If a steward or implementer weakens an invariant → the system is not AURiX.
+
+7.4 Attestation cannot leak information.
+
+No content, no metadata, no personalization.
+
+7.5 Replay cannot reconstruct identity.
+
+Replay reconstructs only attestation logic, never the human.
+
+8. Minimal Compliant Implementation (MCI)
+
+An MCI must:
+
+implement all layers
+
+enforce all gates
+
+expose attestation only
+
+run without cloud inference
+
+support replay
+
+default to HALT on uncertainty
+
+maintain LPIN and SELFiX
+
+allow real-time invariant tests
+
+If any element is weakened, optimized away, or replaced by heuristics, the result is not AURiX.
+
+9. Visual Stack Summary (Text Form)
+[ 5 ] Replay Contract + Local Ledger
+        ↑
+[ 4 ] Attestation Engine (Stable / Uncertain / Halt)
+        ↑
+[ 3 ] Invariant Checking Layer (LPIN Tests)
+        ↑
+[ 2 ] Normalization & Boundary Filter
+        ↑
+[ 1 ] Acquisition Layer (Local-Only Inputs)
+
+
+No layer may bypass another.
+
+10. Single-Sentence Summary
+
+AURiX’s protocol stack transforms local behavioral surfaces into reproducible attestation states through strict invariant enforcement, SELFiX protection, and complete prohibition of identity, inference, or extraction.

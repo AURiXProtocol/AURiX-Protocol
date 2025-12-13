@@ -1,0 +1,282 @@
+AURiX SAFETY & SELFiX DUALITY — v3
+0. Purpose of This Document
+
+This document defines:
+
+the safety boundaries AURiX is required to maintain
+
+the difference between uncertainty and unsafe
+
+the mechanisms that prevent identity collapse
+
+the SELFiX dual structure, which ensures that AURiX can scale to enterprise, government, and high-risk environments without violating LPIN or privacy
+
+enforcement mechanisms that trigger isolation, halt, or refusal
+
+This is the formal safety doctrine of AURiX.
+
+1. The AURiX Safety Mandate
+
+AURiX must enforce safety in five absolute ways:
+
+Safety Through Locality
+→ Nothing leaves the device.
+→ Nothing is inferred remotely.
+
+Safety Through Identity Non-Collapse
+→ AURiX cannot cluster, classify, score, or profile a human.
+
+Safety Through Attestation-Only Output
+→ No opinions, no narratives, no predictions.
+
+Safety Through Immutable Invariants
+→ Invariant violation always results in HALT.
+
+Safety Through Replayability
+→ No attestation can stand unless it can be reproduced.
+
+These guarantees make AURiX incapable of becoming surveillance, even in hostile hands.
+
+2. Safety States (Three-Tier Model)
+
+AURiX expresses safety as state, not explanation:
+
+2.1 Stable
+
+Behavior fits within invariants.
+Contradictions and drift minimal.
+Protocol safe to proceed.
+
+2.2 Uncertain
+
+Contradictions or drift detected that do not violate invariants.
+System must maintain caution and re-evaluate.
+
+2.3 Unsafe (HALT)
+
+An invariant is violated or cannot be verified.
+Execution stops or isolates until safety is restored.
+
+AURiX must never guess, hope, or assume safety — only prove it.
+
+3. The Distinction Between Uncertain and Unsafe
+
+Uncertain ≠ Unsafe.
+This distinction is one of the key innovations of AURiX.
+
+Uncertain State
+
+Something changed.
+
+Behavior is atypical.
+
+The pattern is inconsistent.
+
+But no invariant has been violated.
+
+The system may continue to observe and refine its state.
+
+Unsafe (HALT) State
+
+An invariant is violated.
+
+Or the system cannot guarantee an invariant remains unviolated.
+
+Execution must stop.
+
+Ledger writes record the halt condition.
+
+Replay must confirm the halt or invalidate the prior attestation.
+
+This separation prevents false alarms without compromising safety.
+
+4. SELFiX — The Identity Firewall
+
+SELFiX (Self-Identity Exclusion Architecture) is the system that ensures:
+
+AURiX cannot collapse a user into identity
+
+no implementation can smuggle identity into the protocol
+
+enterprise deployments cannot modify the core protections
+
+replay and ledgering remain safe
+
+large-scale use never becomes surveillance
+
+SELFiX is the second boundary-layer that enforces identity neutrality.
+
+Where AURiX protects behavior, SELFiX protects identity.
+
+5. SELFiX Dual Structure
+
+SELFiX has two sides:
+
+5.1 External SELFiX (Observable Surface)
+
+The only behaviors AURiX can evaluate:
+
+contradiction
+
+drift
+
+boundary stability
+
+page / structural volatility
+
+integrity of the invariants
+
+consistency of the AURiX runtime
+
+External SELFiX =
+Everything AURiX is allowed to see.
+
+No identity may enter the protocol from this side.
+
+5.2 Internal SELFiX (Identity-Protected Core)
+
+Everything AURiX must never touch:
+
+personal history
+
+private content
+
+identity attributes
+
+demographics
+
+preferences
+
+psychology
+
+prediction
+
+classification
+
+profiles
+
+fingerprints
+
+Internal SELFiX =
+Everything AURiX must never see.
+
+This layer ensures AURiX:
+
+cannot back into identity
+
+cannot be repurposed as surveillance
+
+cannot be optimized into collapse
+
+cannot be used for targeting or inference
+
+This is why AURiX is safe for enterprise, regulatory, and institutional deployment.
+
+6. Enterprise SELFiX (SELFiX-E)
+
+This is the SELFiX variant for:
+
+browsers
+
+OS vendors
+
+hardware platforms
+
+corporate networks
+
+government oversight bodies
+
+SELFiX-E enforces:
+
+6.1 Multi-Tenant Isolation
+
+No combined behavioral patterns can produce clusters.
+
+6.2 Anti-Capture Governance
+
+No steward may weaken invariants.
+
+6.3 Boundary Firewalls
+
+Even enterprise logs must not reconstruct identity.
+
+6.4 Replay Auditing
+
+Replay must be possible without identity artifacts.
+
+6.5 Misuse Prevention
+
+SELFiX-E automatically halts if downstream systems attempt:
+
+personalization
+
+scoring
+
+inference
+
+segmentation
+
+pattern extraction beyond AURiX deltas
+
+If a steward attempts to override this: HALT.
+
+7. Misuse Scenarios & How AURiX Prevents Them
+7.1 Surveillance Attempt
+
+Attacker tries to reconstruct user behavior.
+→ BoundaryFilter + SELFiX reject identity-bearing signals.
+
+7.2 Inference Attempt
+
+Platform tries to guess “user type.”
+→ Identity Non-Collapse invariant → HALT.
+
+7.3 Behavioral Scoring
+
+Someone tries to turn attestation into reputation.
+→ Attestation is non-rankable and non-storable.
+→ Must not be persisted in a way that forms a profile.
+
+7.4 Personalization Attack
+
+Browser tries to adapt UI to user behavior.
+→ Non-Persuasion invariant → HALT.
+
+7.5 Organizational Capture
+
+An institution tries to assert control over AURiX.
+→ SELFiX-E forbids invariant modification.
+→ Governance rules enforce distributed stewardship.
+
+8. Safety Through Replayability
+
+Replay ensures that every attestation is:
+
+reproducible
+
+logic-based
+
+safe to verify
+
+not dependent on identity
+
+Replay is the safety backstop.
+If a steward cannot replay the behavior that produced an attestation:
+
+the attestation is void
+
+the system must halt
+
+the steward must investigate
+
+Replay is also how AURiX prevents manipulation.
+
+9. Safety Summary (One Paragraph)
+
+AURiX is safe because it strictly limits what it can see (behavior only), strictly limits what it can output (attestation states only), and strictly limits how identity can enter the system (it cannot).
+SELFiX ensures identity is never observed, inferred, reconstructed, or influenced, even in large enterprise deployments.
+Invariants enforce immediate halts for any unsafe condition, and replay guarantees auditability without surveillance.
+
+10. Single-Sentence Summary
+
+AURiX is safe because SELFiX ensures identity cannot be touched, AURiX ensures behavior cannot be misinterpreted, and invariants ensure the protocol cannot be captured, exploited, or transformed into surveillance.

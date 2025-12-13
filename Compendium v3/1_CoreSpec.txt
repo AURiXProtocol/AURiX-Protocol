@@ -1,0 +1,291 @@
+AURiX CORE SPEC — v3 (DRAFT FOR REVIEW)
+0. Purpose of the Core Specification
+
+AURiX exists to provide a local-only, privacy-preserving, anti-capture behavioral protocol that helps humans and systems maintain clarity, stability, and safety in digital environments without requiring identity, surveillance, or cloud inference.
+
+This Core Specification defines:
+
+The AURiX invariants
+
+The LPIN posture (Local-Only, Privacy-Preserving, Identity-Noncollapsing)
+
+The SELFiX dual structure
+
+The architectural surfaces and guarantees
+
+The minimal behavioral requirements of any compliant AURiX implementation
+
+The anti-capture model
+
+The protocol’s operational boundaries
+
+Everything else in the compendium derives from this document.
+
+1. AURiX Invariants (Non-Negotiable Properties)
+
+AARiX guarantees seven core invariants.
+If any invariant is violated, the protocol must halt, isolate, or refuse execution.
+
+1.1 Local-Only Execution
+
+AURiX must run entirely on the local device.
+No remote inference, no remote decision-making, no profile persistence.
+
+1.2 Identity Non-Collapse
+
+The system must never attempt to infer, classify, or collapse a human into:
+
+a demographic
+
+a psychological type
+
+a political cluster
+
+a risk score
+
+a “truth alignment” or correctness metric
+
+AURiX reports behavioral properties only, never human attributes.
+
+1.3 Privacy Preservation
+
+No behavioral data may leave the device unless the user explicitly performs a transparent export under the replay contract.
+
+AURiX cannot store or transmit any information that could aggregate into surveillance.
+
+1.4 Attestation, Not Reward
+
+AURiX acknowledges attested benefit, not correctness, merit, reputation, or score.
+
+Attestation confirms:
+
+“This action or content behaved predictably under the protocol constraints.”
+
+It never means:
+
+“This is true,”
+“This is moral,”
+“This is socially approved.”
+
+1.5 Anti-Capture
+
+No single entity (corporate, governmental, ideological, or personal) may:
+
+operate the protocol
+
+own the protocol
+
+direct the canonical interpretation
+
+require identity registration
+
+centralize telemetry
+
+The system is structurally intolerant to top-down control.
+
+1.6 Behavioral Neutrality
+
+All protocol outputs must remain non-ideological, non-political, non-adversarial, and grounded exclusively in:
+
+boundary surface behavior
+
+rate of change
+
+consistency
+
+contradiction dynamics
+
+replayable evidence
+
+AURiX makes no claims about truth or belief — only behavior.
+
+1.7 Reproducibility
+
+Every attestation must be locally reproducible by:
+
+the same human,
+
+another human,
+
+another AURiX instance,
+
+and the replay contract.
+
+If it cannot replay, it cannot stand.
+
+2. Core Architectural Components
+
+AURiX consists of five mandatory surfaces:
+
+Input Surface
+→ What the system can observe (locally).
+→ Never includes identity or private user content.
+
+Pattern Consistency Surface
+→ Detects stable vs unstable behavioral properties.
+→ No inference; only observation of contradiction, drift, rate-change.
+
+Invariant Test Surface (LPIN Tests)
+→ Where halts occur.
+→ If any invariant is violated, execution stops or isolates.
+
+Attestation Surface
+→ Produces behavioral confirmations (green/yellow/red equivalents).
+→ Color is a UI choice; the protocol only emits structural state.
+
+Replay Contract Surface
+→ Defines how and when a user or auditor can recreate the behavioral trail.
+
+These surfaces create a scaffold that is predictable, audit-friendly, and resistant to capture.
+
+3. SELFiX Duality (Identity Protection Structure)
+
+SELFiX maintains a strict division between:
+
+3.1 External SELFiX (What AURiX Can See)
+
+Rate of behavioral change
+
+Contradiction frequency
+
+Stability of patterns
+
+Structural drift
+
+Cross-surface consistency
+
+3.2 Internal SELFiX (What It Must Never Touch)
+
+Private thoughts
+
+Identity attributes
+
+Personal history
+
+Emotion, ethics, preference
+
+Predictive classification
+
+This duality prevents collapse.
+External SELFiX informs the protocol without violating internal SELFiX.
+
+4. Guarantee Model
+
+AURiX guarantees:
+
+4.1 Predictability
+
+Same inputs → same outputs → same attested result.
+
+4.2 Local Reproducibility
+
+All behavioral states must be re-evaluable on the same device.
+
+4.3 Non-Inference
+
+AURiX never tries to guess intent, motive, or belief.
+
+4.4 Non-Escalation
+
+The protocol cannot nudge, persuade, manipulate, or guide human behavior.
+
+4.5 Non-Extraction
+
+No data is harvested, aggregated, sold, or shared.
+
+5. Behavioral Outputs (Attestation States)
+
+AURiX emits only three structural states:
+
+5.1 Stable (Green-equivalent)
+
+Behavior is consistent, predictable, non-contradictory under invariant tests.
+
+5.2 Uncertain (Yellow-equivalent)
+
+Contradictions or drifts detected; not unsafe, but unreliable.
+
+5.3 Halt / Unsafe (Red-equivalent)
+
+Invariant violation.
+System must suspend attestation until state is cleared.
+
+These are protocol-level states, not judgments.
+
+6. Minimal Implementation Requirements
+
+Any conforming AURiX implementation must:
+
+Validate all invariants on every cycle.
+
+Run fully local.
+
+Maintain SELFiX dual structure.
+
+Perform pattern consistency checks.
+
+Produce reproducible attestation logs (local only).
+
+Implement the replay contract.
+
+Use no remote inference or telemetry.
+
+Include explicit anti-capture constraints in configuration.
+
+7. Forbidden Behaviors
+
+AURiX must not:
+
+Rank humans
+
+Predict human behavior
+
+Classify identity
+
+Generate truth claims
+
+Persuade or influence
+
+Personalize outputs
+
+Data-mine
+
+Create profiles
+
+Suggest action
+
+Evaluate morality or correctness
+
+Any implementation doing so is not AURiX.
+
+8. Protocol Boundary (Where AURiX Ends)
+
+AURiX ends at:
+
+the attestation surface,
+
+the replay contract,
+
+and the invariant gates.
+
+Everything downstream — UI, browsers, extensions, regulators, apps — is outside AURiX unless explicitly governed by the territorial document.
+
+9. Succession and Stewardship (Core Commitment)
+
+The Core Spec requires:
+
+multi-party stewardship
+
+no single point of control
+
+transparent versioning
+
+dispute resolution by invariant tests
+
+open, identity-free participation
+
+Any attempt to centralize authority invalidates the implementation.
+
+10. Summary (Single Sentence)
+
+AURiX is a local, privacy-preserving, behavior-only protocol that emits structural attestation states without inferring identity, aggregating data, or allowing capture — enforced by strict invariants, SELFiX duality, and reproducible replay.

@@ -1,0 +1,308 @@
+AURiX PRIMITIVES & ENGINEERING GUIDE — v3 (Text Draft for Review)
+0. Purpose of This Document
+
+This document defines the atomic, irreducible building blocks (“primitives”) that an engineer must use to construct a valid AURiX runtime.
+
+These primitives guarantee:
+
+deterministic behavior
+
+invariant alignment
+
+LPIN compliance
+
+SELFiX boundaries
+
+UI-agnostic outputs
+
+replay reproducibility
+
+No AURiX implementation is valid unless it uses these primitives as specified.
+
+1. Primitive Classification (Three Types)
+
+AURiX primitives fall into three categories:
+
+Acquisition Primitives
+→ How signals enter the system
+
+Transformation Primitives
+→ How signals become normalized, identity-free behavioral deltas
+
+Evaluation Primitives
+→ How invariants and attestation are executed
+
+These correspond directly to the Protocol Stack layers.
+
+2. Acquisition Primitives
+
+These primitives define what the system is allowed to observe.
+
+2.1 SurfaceEvent()
+
+Captures a non-identity, non-personal event triggered by user interaction or page behavior.
+
+Inputs may include:
+
+scroll change
+
+click
+
+hover duration
+
+navigation shift
+
+window focus change
+
+Must exclude:
+
+content
+
+private text
+
+metadata that implies identity
+
+behavioral fingerprinting
+
+2.2 RateChange()
+
+Computes the rate at which surface events shift over time.
+
+Used to detect drift, instability, novelty, or contradiction.
+
+2.3 ConsistencyWindow()
+
+Maintains a sliding buffer of past normalized states to measure behavioral coherence.
+
+This buffer may not contain raw content — only derived, identity-free deltas.
+
+2.4 StructureProbe()
+
+Reads page structure without reading content.
+
+Examples:
+
+DOM shape
+
+script density
+
+link clusters
+
+dynamic elements
+
+Outputs are always normalized; never stored raw.
+
+3. Transformation Primitives
+
+These primitives ensure identity cannot leak into the invariant layer.
+
+3.1 Normalize()
+
+Converts acquisition signals into a behavioral vector containing only:
+
+contradiction score
+
+drift score
+
+surface stability
+
+environmental volatility
+
+The output must remain fully LPIN-compliant.
+
+3.2 BoundaryFilter()
+
+Removes or nullifies any signal that could carry identity traces.
+
+Examples of identity-carrying signals that must be nullified:
+
+timestamps
+
+per-user unique patterns
+
+personal identifiers
+
+textual content
+
+sensitive metadata
+
+This is the primitive that enforces SELFiX at the engineering level.
+
+3.3 Delta()
+
+Produces the minimal measurable change from the previous state.
+
+Used in attestation and contradiction analysis.
+
+3.4 NoiseFloor()
+
+Filters meaningless micro-noise so the model isn't oversensitive.
+
+Ensures AURiX doesn’t jitter between attestation states.
+
+4. Evaluation Primitives
+
+These are the heart of AURiX.
+They transform normalized deltas into attestation or halt states.
+
+4.1 InvariantCheck()
+
+Evaluates each invariant individually:
+
+Locality
+
+Privacy
+
+Identity Non-Collapse
+
+Non-Extraction
+
+Non-Persuasion
+
+Predictability
+
+Replayability
+
+Any failure → HALT.
+
+4.2 ContradictionTest()
+
+Measures how contradictory the behavioral vector is compared to the expected pattern.
+
+Outputs:
+
+low contradiction
+
+moderate contradiction
+
+high contradiction
+
+4.3 DriftTest()
+
+Measures volatility of behavioral change.
+
+A moderately drifting system is healthy.
+A rapidly drifting system becomes Uncertain.
+If drift implies identity inference → HALT.
+
+4.4 Attest()
+
+Generates a state:
+
+Stable
+
+Uncertain
+
+Unsafe (Halt)
+
+This primitive produces the only outputs AURiX is allowed to reveal.
+
+4.5 LedgerWrite()
+
+Writes a replayable, non-personal ledger entry:
+
+invariant results
+
+delta vector fingerprints (non-identity)
+
+attestation state
+
+No private data.
+No user history.
+No reconstructable patterns.
+
+4.6 ReplayVerify()
+
+Recreates a past attestation without requiring content or identity.
+If replay cannot verify → attestation is invalid.
+
+5. Engineering Rules (Mandatory)
+
+These rules ensure that even a well-intended engineer cannot accidentally break AURiX.
+
+5.1 Never store raw input.
+
+Only normalized behavioral deltas may be processed.
+
+5.2 Primitives cannot be altered.
+
+You may compose primitives, but you may never modify or replace them.
+
+5.3 Invariant checks must run every cycle.
+
+No skipping, no batching, no optimizations.
+
+5.4 Attestation must remain content-agnostic.
+
+No UI or downstream layer may treat attestation as a truth claim.
+
+5.5 If the system is uncertain, do not assume it is safe.
+
+Uncertain = “needs more information,” not “probably okay.”
+
+5.6 Always fail closed, not open.
+
+If unsure → HALT.
+
+6. Integration With Y-Lens (How Developers Actually Use This)
+
+Y-Lens is built by combining:
+
+SurfaceEvent()
+
+StructureProbe()
+
+Delta()
+
+Attest()
+
+LedgerWrite()
+
+…with UI components:
+
+boundary bubbles
+
+traffic-light cursor halo
+
+hover cards
+
+page wide inspection overlay
+
+Important:
+Y-Lens does NOT contain invariants — it relies on AURiX for that.
+Y-Lens renders what AURiX generates.
+
+This keeps UI changes completely safe.
+
+7. Integration With SELFiX (Enterprise Use)
+
+SELFiX uses AURiX primitives to guarantee:
+
+identity cannot leak
+
+enterprise policies cannot override invariants
+
+replay logs cannot become surveillance
+
+SELFiX also introduces enterprise-only checks, such as:
+
+multi-tenant boundary enforcement
+
+organizational capture prevention
+
+multi-instance attestation consistency
+
+But SELFiX never touches:
+
+content
+
+private data
+
+inference
+
+It simply supervises safe context.
+
+8. Summary Statement
+
+AURiX primitives are the irreducible engineering atoms of the protocol, ensuring that every implementation is invariant-safe, identity-neutral, reproducible, and impossible to capture.
+Y-Lens and SELFiX are constructed on top — never below, never inside — these primitives.

@@ -1,0 +1,159 @@
+AURiX GLOSSARY — v3
+AURiX
+
+A local-only, privacy-preserving behavioral protocol that produces structural attestation states without inferring identity, predicting intent, collapsing users into clusters, or exporting behavioral data.
+AURiX enforces LPIN, SELFiX, anti-capture constraints, and strict invariants via a reproducible, local-only protocol stack.
+
+Attestation
+
+A structural confirmation of behavioral stability under invariant tests.
+Not a reward, not a score, not a judgment.
+AURiX defines three attestation states: Stable, Uncertain, Unsafe.
+
+Attestation Engine
+
+The layer of the AURiX protocol stack that converts normalized behavioral vectors into one of the three attestation states.
+It cannot output content, explanation, or guidance — only state.
+
+Attested Benefit
+
+A positive outcome recognized by the protocol without implying correctness, truth, merit, morality, or identity.
+Indicates only that behavior remained stable and non-contradictory within the invariants.
+
+Boundary-Layer Filter
+
+A layer that strips away identity, personal content, and environmental noise from raw local signals, producing a clean behavioral delta.
+It ensures that no signal entering the invariant tests contains user-specific data.
+
+Behavioral Delta
+
+A normalized, identity-free measurement of change in local behavior.
+Derived only from allowed surfaces (e.g., contradiction rate, drift, stability).
+
+Capture
+
+Any attempt by a person, company, government, ideology, or AI system to centralize control, telemetry, identity, or inference over AURiX.
+If capture occurs, the implementation is not AURiX.
+
+Contradiction
+
+A detectable mismatch between two or more behavioral surfaces, such as inconsistent patterns or fluctuating structural signals.
+Contradiction is non-moral and non-predictive — it is a metric of inconsistency.
+
+Drift
+
+A rate of change in behavioral patterns over time.
+Drift is not “bad” — it merely indicates decreasing stability.
+High drift → attestation shifts toward Uncertain.
+
+External SELFiX
+
+The observable layer of behavior AURiX may analyze.
+Includes contradictions, drift, boundary-layer signals, and surface-level behavior.
+Never includes identity or private content.
+
+FLIBD (Full-Layer Invariant Behavioral Diagnostics)
+
+A non-political, non-ideological diagnostic method for evaluating cross-system behavioral contradictions and drift.
+AURiX uses FLIBD as an external reference lens for validating attestation consistency across large systems.
+
+Halt
+
+A forced stop in attestation triggered by an invariant violation.
+Halt is not punishment — it is a protective behavior.
+
+Identity Collapse
+
+Any attempt to predict, profile, cluster, infer, categorize, or otherwise “sum up” a human or system based on behavior.
+Strictly forbidden.
+AURiX prevents this through LPIN and SELFiX.
+
+Invariant
+
+A non-negotiable protocol requirement.
+If violated, AURiX must halt or isolate.
+Examples: Locality, Privacy, Identity Non-Collapse, Non-Persuasion, Anti-Extraction, Reproducibility.
+
+Invariant Test
+
+A deterministic check used to verify that the invariants have not been violated.
+Run on every cycle.
+Must be reproducible locally.
+
+LPIN (Local-Only, Privacy-Preserving, Identity-Noncollapsing)
+
+The foundational posture of AURiX.
+Ensures the protocol:
+
+never leaves the device,
+
+never stores or exports private data,
+
+never reduces humans to interpreted identities.
+
+Ledger (Local Ledger)
+
+A minimal, privacy-preserving structure that records attestation events for replay verification.
+Contains no user data, no history, no identity, and no reconstructable behavior.
+
+Method Physics
+
+AURiX’s underlying theoretical framework derived from contradiction, drift, reproducibility, and invariant dynamics.
+Designed for behavioral analysis without relying on identity or inference.
+
+Normalization
+
+The process of converting raw behavioral signals into stable, identity-free deltas suitable for invariant testing.
+
+Pattern Consistency
+
+A measure of how stable or repeatable an observed behavior is.
+Higher consistency → closer to Stable attestation.
+
+Replay Contract
+
+A formal agreement inside the protocol defining how attestation states can be reproduced locally.
+Used for audits and validation.
+Replay cannot reconstruct identity, only the logic that produced the attestation.
+
+SELFiX (Self-Identity Exclusion Architecture)
+
+A dual-structured identity protection mechanism that ensures:
+
+AURiX only sees external behavior (permitted),
+
+AURiX never touches internal identity (forbidden).
+
+SELFiX prevents personalization, inference, and collapse.
+
+Stable State
+
+Attestation surface indicating that behavior is predictable and contradiction-free under invariant tests.
+
+Uncertain State
+
+Attestation surface indicating drift, instability, or contradiction that is not unsafe but not stable.
+
+Unsafe State
+
+Attestation surface indicating an invariant violation, triggering HALT.
+
+Y-Lens
+
+The implementation-layer expression of AURiX attestation (UI, cursor, halos), representing the protocol’s outputs in real-world applications.
+Y-Lens is not the protocol — it is the visualization and interface built on top of it.
+
+Territory
+
+The boundary defining where AURiX ends and external systems begin.
+Ensures that AURiX is not held responsible for downstream or upstream interpretations.
+
+Traffic-Light Equivalent
+
+The common UI expression of attestation states (green / yellow / red).
+Not required by the protocol; merely a conventional representation.
+
+Zero-State
+
+The neutral position before any attestation occurs.
+No inference, no signals, no assumptions.
