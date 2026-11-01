@@ -1,0 +1,8 @@
+{
+  "name": "model-gate",
+  "version": "0.1.1",
+  "description": "Refuses any Agent spawn that does not name a cheaper model (sonnet, haiku or opus). The user's model law, enforced before the call.",
+  "author": {
+    "name": "AURiX"
+  }
+}

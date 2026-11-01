@@ -1,0 +1,14 @@
+{
+  "name": "aurix-mods",
+  "description": "Mods for Claude Code, made by AURiX.",
+  "owner": {
+    "name": "AURiX"
+  },
+  "plugins": [
+    {
+      "name": "model-gate",
+      "source": "./plugins/model-gate",
+      "description": "Refuses any Agent spawn that does not name a cheaper model (sonnet, haiku or opus). The user's model law, enforced before the call."
+    }
+  ]
+}
