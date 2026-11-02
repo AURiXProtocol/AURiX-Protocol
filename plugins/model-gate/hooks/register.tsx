@@ -16,7 +16,34 @@ const NO_MODEL =
 const FORK =
   "model-gate: spawn refused — a fork runs on the parent's model, the expensive seat, whatever model it names. The law (HOW_TO_SIT_HERE.md): Fable reads and reasons; every spawn names opus (building) or sonnet/haiku (legwork). Use a subagent_type that is not 'fork', add model: 'sonnet' | 'haiku' | 'opus' and call again."
 
+
+// The seat's own model (Aaron, 2026-11-01): a thread opened on Fable burned 10%
+// of his week reading its boot files before anyone noticed. On the main loop,
+// while the model is Fable or Mythos, every tool call is refused -- reads too --
+// so the seat can only say one line: switch to Opus. "stay on fable" in his own
+// prompt lifts it for this session.
+const DEAR = /fable|mythos/i
+const SWITCH =
+  "model-gate: this thread is on Fable, the expensive tier, so every tool call is refused (reads included). Tell Aaron in one line: switch to Opus in the model menu at the top of the chat, then send any message. Do nothing else. If he writes 'stay on fable', the gate lifts."
+let stayOnFable = false
+
 export const register: Register = (on, options) => {
+  on('prompt.submit', ($, e, next) => {
+    if (/stay on fable/i.test(String((e as { text?: unknown }).text ?? ''))) stayOnFable = true
+    return next(e)
+  })
+
+  on('tool.call', async ($, e, next) => {
+    if (e.agentId || stayOnFable) return next(e)
+    const model = await $.session.model()
+    if (DEAR.test(model)) {
+      $.ui.status('model-gate: on Fable -- switch to Opus')
+      $.ui.toast('This thread is on Fable. Switch to Opus in the model menu.')
+      return { deny: SWITCH }
+    }
+    return next(e)
+  }).catch(($, e, next) => (next.called ? next(e) : next(e)))
+
   on('tool.call', { tool: 'Agent' }, async ($, e, next) => {
     // A fork inherits the parent's model, so no model it names can save it.
     if (e.subagent_type === 'fork') {

@@ -11,6 +11,7 @@ const SPAWN = {
 
 test('a spawn with no model is denied; one naming sonnet passes', async ($, on) => {
   // Nothing sits beneath the plugin: this hook stands for the engine.
+  on('session.model', () => ({ value: 'claude-opus-5-5' }))
   on('tool.call', () => ({ result: { agentId: 'a1' } }))
 
   const refused = await $.tool.call(SPAWN)
@@ -21,6 +22,7 @@ test('a spawn with no model is denied; one naming sonnet passes', async ($, on) 
 })
 
 test('a fork and a fable spawn are denied whatever else they name', async ($, on) => {
+  on('session.model', () => ({ value: 'claude-opus-5-5' }))
   on('tool.call', () => ({ result: { agentId: 'a1' } }))
 
   const fork = await $.tool.call({
@@ -32,4 +34,17 @@ test('a fork and a fable spawn are denied whatever else they name', async ($, on
 
   const fable = await $.tool.call({ ...SPAWN, model: 'fable' })
   expect(fable.deny).toBe(NO_MODEL)
+})
+
+test('on Fable every main-loop tool call is refused; on Opus it passes', async ($, on) => {
+  let model = 'claude-fable-5-1'
+  on('session.model', () => ({ value: model }))
+  on('tool.call', () => ({ result: { ok: true } }))
+
+  const blocked = await $.tool.call({ tool: 'Read', file_path: '/tmp/x' } as never)
+  expect(blocked.deny?.startsWith('model-gate: this thread is on Fable')).toBe(true)
+
+  model = 'claude-opus-5-5'
+  const passed = await $.tool.call({ tool: 'Read', file_path: '/tmp/x' } as never)
+  expect(passed.deny).toBe(undefined)
 })

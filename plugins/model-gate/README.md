@@ -21,3 +21,8 @@ After Claude hands a job to a helper that names a model, the status line reads `
 Uninstall it: `claude plugin uninstall model-gate`.
 
 MIT licensed. See `LICENSE`.
+
+
+## 0.2.0 (2026-11-01)
+
+Also guards the thread itself: while the session's own model is Fable or Mythos, every tool call on the main loop is refused, reads included, so the thread can only say one line: switch to Opus in the model menu. Writing "stay on fable" in a prompt lifts it for that session.

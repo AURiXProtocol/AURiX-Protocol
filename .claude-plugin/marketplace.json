@@ -8,7 +8,7 @@
     {
       "name": "model-gate",
       "source": "./plugins/model-gate",
-      "description": "Refuses any Agent spawn that does not name a cheaper model (sonnet, haiku or opus). The user's model law, enforced before the call."
+      "description": "Refuses any Agent spawn that does not name a cheaper model, and refuses every tool call while the thread itself runs on Fable or Mythos."
     }
   ]
 }
